@@ -28,8 +28,6 @@ Example of a tree of runnables:
 - help
 ```
 
-## Options
-
 The options for this call affect how many details will be sent in the response,
 allowing different clients to only request information they need (the
 command-line client has no use for icons).
@@ -42,18 +40,38 @@ Example:
         "request": "get_tree",
         "options": {
             "arguments": true,
-            "icons": checksum,
+            "icons": "checksum",
             "depth": 0
         }
     }
 }
 ```
 
+## Options
+
+### Arguments
+
+> Provide information about the runnables' arguments
+
+|**Key**      | `"arguments"`|
+| :---------- | :--- |
+|**Values**   | `true` or `false`
+|**Default**  | `false`
+|**Mandatory**| no
+
+To get information about the arguments of the runnables, set the `"arguments"`
+option to `true`. The information will be present with every runnable in the
+tree under the `"arguments"` key.
+
 ### Depth
 
 > `"depth"`: Depth of the returned tree
 
-**Values**: Positive integer, 0 meaning infinity
+|**Key**      | `"depth"`|
+| :---------- | :--- |
+|**Values**   | Positive integer, 0 meaning infinity
+|**Default**  | `0`
+|**Mandatory**| no
 
 This option limits the depth of the returned tree. A limited tree depth may be
 useful for GUI clients.
@@ -62,4 +80,123 @@ useful for GUI clients.
 
 > `"icons"`: Fetch icons or their checksum
 
-**Values**: `null`, `"data"`, or `"checksum"`
+|**Key**      | `"icons"`|
+| :---------- | :--- |
+|**Values**   | `null`, `"data"` or `"checksum"`
+|**Default**  | `null`
+|**Mandatory**| no
+
+With this option (selecting `"data"`), base64-encoded icon files can be
+obtained for displaying in the client. At the moment, only SVG and PNG formats
+are supported in DevAssistant.
+
+To save data, the client can fetch only checksums of the icons it stores in a
+cache, and if they differ, perform another call to refresh them.
+
+### Root
+
+> `"root"`: Return children of this runnable
+
+|**Key**      | `"root"`|
+| :---------- | :--- |
+|**Values**   | Slash-delimited path to runnable (with the leading slash), `"/"`, or empty string
+|**Default**  | `"/"`
+|**Mandatory**| no
+
+**Example**: `"root": "/crt/python"`
+
+If you want to retrieve only the children of a particular runnable, you may
+select so with the `"root"` key. In the example above, that would be
+subassistants to the Python *creator* assistant.
+
+
+# Reply
+
+The reply contains a list of details on runnables and their details, including
+a list of their children (forming a tree-like structure).
+
+**Example**
+```
+{
+  "version": "1.0a",
+  "tree": [
+    {
+      "name": "crt",
+      "fullname": "Create assistants",
+      "description": "Kickstart new projects easily with DevAssistant.",
+      "path": "/crt",
+      "icon": {
+        "checksum": "0123456789abcdef",
+        "data": "base64...",
+        "mimetype": "image/svg+xml; charset=us-ascii"
+      },
+      "arguments": [
+        { },
+        ...
+      ],
+      "children": [...]
+    },
+    ...
+  ]
+}
+```
+
+## Fields
+
+### Name
+
+| **Present** | **yes** |
+| :---------- | :------ |
+
+A short name representation of the runnable. Last element of the field
+`"path"`.
+
+### Fullname
+
+| **Present** | **yes** |
+| :---------- | :------ |
+
+A human-readable name of the runnable.
+
+### Description
+
+| **Present** | **yes** |
+| :---------- | :------ |
+
+A detailed, multi-line description of the runnable.
+
+### Path
+
+| **Present** | **yes** |
+| :---------- | :------ |
+
+**Example**: `"/crt/python"`
+
+Path to the runnable. In the example, leading to the Python *creator*
+assistant.
+
+### Icon
+
+| **Present** | maybe |
+| :---------- | :------ |
+
+An object describing the icon's data. Based on the query from the client,
+either the field `"checksum"` with the checksum will be present, or `"data"`
+and `"mimetype"` will.
+
+### Arguments
+
+| **Present** | maybe |
+| :---------- | :------ |
+
+A list of objects, each describing an argument the runnable takes. The fields
+in the argument object closely correspond to the arguments to the
+`ArgumentParser.add_argument` method in Python.
+
+### Children
+
+| **Present** | **yes** |
+| :---------- | :------ |
+
+A list of child runnables (same format as this level, suited for recursive
+traversal).

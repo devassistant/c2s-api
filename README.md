@@ -51,32 +51,3 @@ version if the compatibility is not affected.
 
 All client requests must have this keyword.
 
-## Request types
-
-### Get Tree (of runnables)
-
-In DevAssistant, the script implementing a workflow is called an *assistant*.
-There are also *actions*, which take care about other activities like
-installing packages, displaying help etc. In the API, these two types are equal
-and are called *runnables*. They are ordered in a tree-like structure that
-corresponds to their role, and which can be obtained from the server by
-executing a `get_tree` request.
-
-Example of a tree of runnables:
-```
-- crt
-    - python
-      - django
-      - library
-    - ruby
-      - rails
-- pkg
-    - install
-    - info
-    - remove
-- help
-```
-
-### Format
-
-The request
