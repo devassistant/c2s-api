@@ -160,8 +160,8 @@ always emit this message when the run is finished regardless of errors.
     "version": "1.0a",
     "question": {
         "id": "0123456789abcdef",
-        "prompt": "Username:",
-        "message": "Please select a GitHub username.",
+        "prompt": "Username",
+        "message": "Please enter a GitHub username.",
         "type": "password"
     }
 }
@@ -177,7 +177,7 @@ resumes when the client responds.
 | **Type** | String |
 | **Present** | Always |
 
-The unique ID of the run as received in the [Acknowledgment](#Acknowledgment).
+The unique ID of the run as received in the [Acknowledgment](#reply-acknowledgment).
 
 ### Prompt
 
