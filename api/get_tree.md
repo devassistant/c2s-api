@@ -202,7 +202,7 @@ assistant.
 
 An object describing the icon's data. Based on the query from the client,
 either the property `"checksum"` with the checksum will be present, or `"data"`
-and `"mimetype"` will.
+and `"mimetype"` will. The data are base64-encoded.
 
 ### Arguments
 
