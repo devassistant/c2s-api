@@ -214,7 +214,7 @@ and `"mimetype"` will. The data are base64-encoded.
 **Example**:
 
 ```
-[
+"arguments" : [
     {
         "name": "name",
         "flags": ["-n", "--name"],
