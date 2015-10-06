@@ -15,17 +15,17 @@ current configuration.
 
 Example of a tree of runnables:
 ```
-- crt
-    - python
-      - django
-      - library
-    - ruby
-      - rails
-- pkg
-    - install
-    - info
-    - remove
-- help
+├── crt
+│   ├── python
+│   │   ├── django
+│   │   └── library
+│   └── ruby
+│       └── rails
+├── pkg
+│   ├── info
+│   ├── install
+│   └── remove
+└── help
 ```
 
 The options for this call affect how many details will be sent in the response,
