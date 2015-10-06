@@ -93,8 +93,10 @@ flag or metavar).
 
 # Reply (Acknowledgment)
 
-When the run is initiated, the server send the client a message that looks like
-this:
+When the run is initiated, the server sends the client a message that looks
+like this:
+
+**Example**
 
 ```
 {
@@ -105,8 +107,8 @@ this:
 }
 ```
 
-The run ID is a UUID identifying the particular run. The same ID will be
-present in all logging messages and queries that occur during that run. The
+The run ID is a unique string identifying the particular run. The same ID will
+be present in all logging messages and queries that occur during that run. The
 client should save it for the time of the run as it is necessary for the
 replies to interactive querying.
 
@@ -125,9 +127,9 @@ replies to interactive querying.
 }
 ```
 
-The log message always contains all properties shown in the example. The
-logging messages fall into the standard four levels of logging: `debug`,
-`info`, `warning`, and `error`, and each message is accompanied by its run ID.
+The log object always contains all properties shown in the example. The logging
+messages fall into the standard four levels of logging: `debug`, `info`,
+`warning`, and `error`, and each message is accompanied by its run ID.
 
 # Reply (Run Finished)
 
@@ -157,7 +159,7 @@ always emit this message when the run is finished regardless of errors.
 {
     "version": "1.0a",
     "question": {
-        "id": "0123456789abcdef"
+        "id": "0123456789abcdef",
         "prompt": "Username:",
         "message": "Please select a GitHub username.",
         "type": "password"
@@ -165,14 +167,17 @@ always emit this message when the run is finished regardless of errors.
 }
 ```
 
-### ID
+The server halts the execution once this message has been sent. The execution
+resumes when the client responds.
+
+### Run ID
 
 | **Property** | `"id"` |
 | :---------- | :------ |
 | **Type** | String |
 | **Present** | Always |
 
-The ID of the run.
+The unique ID of the run as received in the [Acknowledgment](#Acknowledgment).
 
 ### Prompt
 
@@ -181,7 +186,7 @@ The ID of the run.
 | **Type** | String |
 | **Present** | Always |
 
-The short prompt text of the question (without a space at the end).
+The short prompt text of the question.
 
 ### Message
 
@@ -202,7 +207,7 @@ The long ushering text of the question.
 The `type` property is currently used for indicating a password, i. e. the text
 should be hidden.
 
-In the future, multiple-choice and similar question types should be supported.
+In the future, multiple-choice and other question types should be supported.
 
 ## Answer (Client → Server)
 
