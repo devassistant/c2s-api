@@ -69,9 +69,9 @@ tree under the `"arguments"` property.
 
 |**Property** | `"depth"`|
 | :---------- | :--- |
-|**Values**   | Positive integer, 0 meaning infinity
-|**Default**  | `0`
-|**Mandatory**| no
+|**Values**   | Positive integer, 0 meaning infinity |
+|**Default**  | `0` |
+|**Mandatory**| no |
 
 This option limits the depth of the returned tree. A limited tree depth may be
 useful for GUI clients.
@@ -82,9 +82,9 @@ useful for GUI clients.
 
 |**Property** | `"icons"`|
 | :---------- | :--- |
-|**Values**   | `null`, `"data"` or `"checksum"`
-|**Default**  | `null`
-|**Mandatory**| no
+|**Values**   | `null`, `"data"` or `"checksum"` |
+|**Default**  | `null` |
+|**Mandatory**| no |
 
 With this option (selecting `"data"`), base64-encoded icon files can be
 obtained for displaying in the client. At the moment, only SVG and PNG formats
@@ -99,9 +99,9 @@ cache, and if they differ, perform another call to refresh them.
 
 |**Property** | `"root"`|
 | :---------- | :--- |
-|**Values**   | Slash-delimited path to runnable (with the leading slash), `"/"`, or empty string
-|**Default**  | `"/"`
-|**Mandatory**| no
+|**Values**   | Slash-delimited path to runnable (with the leading slash), `"/"`, or empty string |
+|**Default**  | `"/"` |
+|**Mandatory**| no |
 
 **Example**: `"root": "/crt/python"`
 
@@ -112,8 +112,8 @@ subassistants to the Python *creator* assistant.
 
 # Reply
 
-The reply contains a list of details on runnables and their details, including
-a list of their children (forming a tree-like structure).
+The reply contains an array of details on runnables and their details,
+including an array of their children (forming a tree-like structure).
 
 **Example**
 ```
@@ -147,15 +147,17 @@ a list of their children (forming a tree-like structure).
 
 | **Property** | `"name"` |
 | :---------- | :------ |
+| **Type**    | String   |
 | **Present** | Always |
 
-A short name representation of the runnable. Last element of the property
-`"path"`.
+A short name representation of the runnable. Identical to the last element of
+the property `"path"`.
 
 ### Full Name
 
 | **Property** | `"fullname"` |
 | :---------- | :------ |
+| **Type**    | String   |
 | **Present** | Always |
 
 A human-readable name of the runnable.
@@ -164,6 +166,7 @@ A human-readable name of the runnable.
 
 | **Property** | `"description"` |
 | :---------- | :------ |
+| **Type**    | String (with newlines)   |
 | **Present** | Always |
 
 A detailed, multi-line description of the runnable.
@@ -172,6 +175,7 @@ A detailed, multi-line description of the runnable.
 
 | **Property** | `"path"` |
 | :---------- | :------ |
+| **Type**    | String   |
 | **Present** | Always |
 
 **Example**: `"/crt/python"`
@@ -183,6 +187,7 @@ assistant.
 
 | **Property** | `"icon"` |
 | :---------- | :------ |
+| **Type**    | Object   |
 | **Present** | If requested |
 
 **Example**:
@@ -203,6 +208,7 @@ and `"mimetype"` will.
 
 | **Property** | `"arguments"` |
 | :---------- | :------ |
+| **Type**    | Array    |
 | **Present** | If requested |
 
 **Example**:
@@ -215,7 +221,8 @@ and `"mimetype"` will.
         "kwargs": {
             "dest": "name",
             "help": "Name of the project to create",
-            "required": true},
+            "required": true
+        },
         "positional": false
     },
     {
@@ -235,7 +242,7 @@ and `"mimetype"` will.
 
 ```
 
-A list of objects, each describing an argument the runnable takes. The
+An array of objects, each describing an argument the runnable takes. The
 properties within `"kwargs"` closely mirror the arguments of [the
 `ArgumentParser.add_argument`
 method](https://docs.python.org/3/library/argparse.html?highlight=argumentparser.add_argument#argparse.ArgumentParser.add_argument)
@@ -245,7 +252,8 @@ in Python. The `"kwargs"` object may be empty.
 
 | **Property** | `"children"` |
 | :---------- | :------ |
+| **Type**    | Array   |
 | **Present** | Always |
 
-A list of child runnables (same format as this level, suited for recursive
+An array of child runnables (same format as this level, suited for recursive
 traversal).
