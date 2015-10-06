@@ -205,9 +205,41 @@ and `"mimetype"` will.
 | :---------- | :------ |
 | **Present** | If requested |
 
+**Example**:
+
+```
+[
+    {
+        "name": "name",
+        "flags": ["-n", "--name"],
+        "kwargs": {
+            "dest": "name",
+            "help": "Name of the project to create",
+            "required": true},
+        "positional": false
+    },
+    {
+        "name": "venv",
+        "flags": ["--venv"],
+        "kwargs": {
+            "action": "store_const",
+            "const": "venv",
+            "default": "",
+            "dest": "venv",
+            "help": "Use virtualenv to set up project and install dependencies."
+        },
+        "positional": false
+    },
+    ...
+]
+
+```
+
 A list of objects, each describing an argument the runnable takes. The
-properties in the argument object closely correspond to the arguments of the
-`ArgumentParser.add_argument` method in Python.
+properties within `"kwargs"` closely mirror the arguments of [the
+`ArgumentParser.add_argument`
+method](https://docs.python.org/3/library/argparse.html?highlight=argumentparser.add_argument#argparse.ArgumentParser.add_argument)
+in Python. The `"kwargs"` object may be empty.
 
 ### Children
 
