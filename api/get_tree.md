@@ -34,9 +34,9 @@ command-line client has no use for icons).
 
 ## Workflow
 
-The workflow for the *Get Tree* request is purely synchronous:
+The workflow for the `get_tree` request is purely synchronous:
 
-1. **Client → Server**: *Get Tree* request
+1. **Client → Server**: `get_tree` request
 1. One of:
     * **Server → Client**: Reply
     * **Server → Client**: Error message
