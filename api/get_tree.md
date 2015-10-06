@@ -29,10 +29,23 @@ Example of a tree of runnables:
 ```
 
 The options for this call affect how many details will be sent in the response,
-allowing different clients to only request information they need (the
+allowing different clients to only request information they need (e. g. the
 command-line client has no use for icons).
 
-Example:
+## Workflow
+
+The workflow for the *Get Tree* request is purely synchronous:
+
+1. **Client → Server**: *Get Tree* request
+1. One of:
+    * **Server → Client**: Reply
+    * **Server → Client**: Error message
+
+
+## Query Options
+
+**Example**
+
 ```
 {
     "version": "1.0a",
@@ -47,15 +60,15 @@ Example:
 }
 ```
 
-## Options
+The query may (or *must* if specified) include one of the following options:
 
 ### Arguments
 
 |**Property** | `"arguments"`|
 | :---------- | :--- |
-|**Values**   | `true` or `false`
-|**Default**  | `false`
-|**Mandatory**| no
+|**Values** | `true` or `false` |
+|**Default** | `false` |
+|**Mandatory**| no |
 
 To get information about the arguments of the runnables, set the `"arguments"`
 option to `true`. The information will be present with every runnable in the
@@ -65,8 +78,8 @@ tree under the `"arguments"` property.
 
 |**Property** | `"depth"`|
 | :---------- | :--- |
-|**Values**   | Positive integer, 0 meaning infinity |
-|**Default**  | `0` |
+|**Values** | Positive integer, 0 meaning infinity |
+|**Default** | `0` |
 |**Mandatory**| no |
 
 This option limits the depth of the returned tree. A limited tree depth may be
@@ -76,8 +89,8 @@ useful for GUI clients.
 
 |**Property** | `"icons"`|
 | :---------- | :--- |
-|**Values**   | `null`, `"data"` or `"checksum"` |
-|**Default**  | `null` |
+|**Values** | `null`, `"data"` or `"checksum"` |
+|**Default** | `null` |
 |**Mandatory**| no |
 
 With this option (selecting `"data"`), base64-encoded icon files can be
@@ -91,8 +104,8 @@ cache, and if they differ, perform another call to refresh them.
 
 |**Property** | `"root"`|
 | :---------- | :--- |
-|**Values**   | Slash-delimited path to runnable (with the leading slash), `"/"`, or empty string |
-|**Default**  | `"/"` |
+|**Values** | Slash-delimited path to runnable (with the leading slash), `"/"`, or empty string |
+|**Default** | `"/"` |
 |**Mandatory**| no |
 
 **Example**: `"root": "/crt/python"`
@@ -135,21 +148,24 @@ including an array of their children (forming a tree-like structure).
 
 ## Properties
 
+Each item in the array of runnables has these properties (some may be omitted
+as specified):
+
 ### Name
 
 | **Property** | `"name"` |
 | :---------- | :------ |
-| **Type**    | String   |
+| **Type** | String |
 | **Present** | Always |
 
 A short name representation of the runnable. Identical to the last element of
-the property `"path"`.
+the property [`"path"`](#path).
 
 ### Full Name
 
 | **Property** | `"fullname"` |
 | :---------- | :------ |
-| **Type**    | String   |
+| **Type** | String |
 | **Present** | Always |
 
 A human-readable name of the runnable.
@@ -158,7 +174,7 @@ A human-readable name of the runnable.
 
 | **Property** | `"description"` |
 | :---------- | :------ |
-| **Type**    | String (with newlines)   |
+| **Type** | String (with newlines) |
 | **Present** | Always |
 
 A detailed, multi-line description of the runnable.
@@ -167,7 +183,7 @@ A detailed, multi-line description of the runnable.
 
 | **Property** | `"path"` |
 | :---------- | :------ |
-| **Type**    | String   |
+| **Type** | String |
 | **Present** | Always |
 
 **Example**: `"/crt/python"`
@@ -179,8 +195,8 @@ assistant.
 
 | **Property** | `"icon"` |
 | :---------- | :------ |
-| **Type**    | Object   |
-| **Present** | If requested |
+| **Type** | Object |
+| **Present** | If requested (see [`"icons"`](#icons)) |
 
 **Example**:
 
@@ -192,16 +208,21 @@ assistant.
 "icon": { "data": "0123456789abcdef", "mimetype": "image/svg+xml; charset=us-ascii"}
 ```
 
-An object describing the icon's data. Based on the query from the client,
-either the property `"checksum"` with the checksum will be present, or `"data"`
-and `"mimetype"` will. The data are base64-encoded.
+An object describing the icon's data. Based on the [`"icons"` property](#icons)
+from the query, either the property `"checksum"` with the icon's MD5 checksum
+will be present, or `"data"` and `"mimetype"` will. The data are
+base64-encoded.
+
+The client may either calculate the checksums of the icons every time to verify
+if they have changed, or (which may be more practical) store the checksums as
+provided by the server, and check against those.
 
 ### Arguments
 
 | **Property** | `"arguments"` |
 | :---------- | :------ |
-| **Type**    | Array    |
-| **Present** | If requested |
+| **Type** | Array |
+| **Present** | If requested (see [`"arguments"`](#arguments) |
 
 **Example**:
 
@@ -244,8 +265,8 @@ in Python. The `"kwargs"` object may be empty.
 
 | **Property** | `"children"` |
 | :---------- | :------ |
-| **Type**    | Array   |
+| **Type** | Array |
 | **Present** | Always |
 
-An array of child runnables (same format as this level, suited for recursive
+An array of child runnables (same format as this runnable, suited for recursive
 traversal).
