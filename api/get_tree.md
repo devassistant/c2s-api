@@ -5,9 +5,9 @@
 In DevAssistant, the script implementing a workflow is called an *assistant*.
 There are also *actions*, which take care about other activities like
 installing packages, displaying help etc. In the API, these two types are equal
-and are called *runnables*. They are ordered in a tree-like structure that
-corresponds to their role, and which can be obtained from the server by
-executing a `get_tree` request.
+and are called *runnables*. They are ordered in a tree-like structure (the top
+level is not a single item, but an array) that corresponds to their role, and
+which can be obtained from the server by executing a `get_tree` request.
 
 This request is useful when constructing a user interface or an argument parser
 in the client that shows the user what they can run in DevAssistant with their
@@ -51,8 +51,6 @@ Example:
 
 ### Arguments
 
-> Provide information about the runnables' arguments
-
 |**Property** | `"arguments"`|
 | :---------- | :--- |
 |**Values**   | `true` or `false`
@@ -65,8 +63,6 @@ tree under the `"arguments"` property.
 
 ### Depth
 
-> `"depth"`: Depth of the returned tree
-
 |**Property** | `"depth"`|
 | :---------- | :--- |
 |**Values**   | Positive integer, 0 meaning infinity |
@@ -77,8 +73,6 @@ This option limits the depth of the returned tree. A limited tree depth may be
 useful for GUI clients.
 
 ### Icons
-
-> `"icons"`: Fetch icons or their checksum
 
 |**Property** | `"icons"`|
 | :---------- | :--- |
@@ -94,8 +88,6 @@ To save data, the client can fetch only checksums of the icons it stores in a
 cache, and if they differ, perform another call to refresh them.
 
 ### Root
-
-> `"root"`: Return children of this runnable
 
 |**Property** | `"root"`|
 | :---------- | :--- |
