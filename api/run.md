@@ -35,14 +35,14 @@ logging messages will be emitted.
 
 ## Workflow
 
-1. **Client -> Server**: Run request
-1. **Server -> Client**: Acknowledgment
+1. **Client → Server**: Run request
+1. **Server → Client**: Acknowledgment
 1. Any number of times one of:
-    * **Server -> Client**: 0+ Logging messages
+    * **Server → Client**: 0+ Logging messages
     * An interactive query
-        1. **Server -> Client**: Query
-        1. **Client -> Server**: Reply to the query
-1. **Server -> Client**: Run finished
+        1. **Server → Client**: Query
+        1. **Client → Server**: Reply to the query
+1. **Server → Client**: Run finished
 
 ## Options
 
