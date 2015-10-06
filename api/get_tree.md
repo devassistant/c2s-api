@@ -53,7 +53,7 @@ Example:
 
 > Provide information about the runnables' arguments
 
-|**Key**      | `"arguments"`|
+|**Property** | `"arguments"`|
 | :---------- | :--- |
 |**Values**   | `true` or `false`
 |**Default**  | `false`
@@ -61,13 +61,13 @@ Example:
 
 To get information about the arguments of the runnables, set the `"arguments"`
 option to `true`. The information will be present with every runnable in the
-tree under the `"arguments"` key.
+tree under the `"arguments"` property.
 
 ### Depth
 
 > `"depth"`: Depth of the returned tree
 
-|**Key**      | `"depth"`|
+|**Property** | `"depth"`|
 | :---------- | :--- |
 |**Values**   | Positive integer, 0 meaning infinity
 |**Default**  | `0`
@@ -80,7 +80,7 @@ useful for GUI clients.
 
 > `"icons"`: Fetch icons or their checksum
 
-|**Key**      | `"icons"`|
+|**Property** | `"icons"`|
 | :---------- | :--- |
 |**Values**   | `null`, `"data"` or `"checksum"`
 |**Default**  | `null`
@@ -97,7 +97,7 @@ cache, and if they differ, perform another call to refresh them.
 
 > `"root"`: Return children of this runnable
 
-|**Key**      | `"root"`|
+|**Property** | `"root"`|
 | :---------- | :--- |
 |**Values**   | Slash-delimited path to runnable (with the leading slash), `"/"`, or empty string
 |**Default**  | `"/"`
@@ -106,7 +106,7 @@ cache, and if they differ, perform another call to refresh them.
 **Example**: `"root": "/crt/python"`
 
 If you want to retrieve only the children of a particular runnable, you may
-select so with the `"root"` key. In the example above, that would be
+select so with the `"root"` property. In the example above, that would be
 subassistants to the Python *creator* assistant.
 
 
@@ -141,33 +141,33 @@ a list of their children (forming a tree-like structure).
 }
 ```
 
-## Fields
+## Properties
 
 ### Name
 
-| **Present** | **yes** |
+| **Present** | Always |
 | :---------- | :------ |
 
-A short name representation of the runnable. Last element of the field
+A short name representation of the runnable. Last element of the property
 `"path"`.
 
 ### Fullname
 
-| **Present** | **yes** |
+| **Present** | Always |
 | :---------- | :------ |
 
 A human-readable name of the runnable.
 
 ### Description
 
-| **Present** | **yes** |
+| **Present** | Always |
 | :---------- | :------ |
 
 A detailed, multi-line description of the runnable.
 
 ### Path
 
-| **Present** | **yes** |
+| **Present** | Always |
 | :---------- | :------ |
 
 **Example**: `"/crt/python"`
@@ -177,25 +177,35 @@ assistant.
 
 ### Icon
 
-| **Present** | maybe |
+| **Present** | If requested |
 | :---------- | :------ |
 
+**Example**:
+
+```
+"icon": { "checksum": "0123456789abcdef" }
+```
+
+```
+"icon": { "data": "0123456789abcdef", "mimetype": "image/svg+xml; charset=us-ascii"}
+```
+
 An object describing the icon's data. Based on the query from the client,
-either the field `"checksum"` with the checksum will be present, or `"data"`
+either the property `"checksum"` with the checksum will be present, or `"data"`
 and `"mimetype"` will.
 
 ### Arguments
 
-| **Present** | maybe |
+| **Present** | If requested |
 | :---------- | :------ |
 
-A list of objects, each describing an argument the runnable takes. The fields
-in the argument object closely correspond to the arguments to the
+A list of objects, each describing an argument the runnable takes. The
+properties in the argument object closely correspond to the arguments of the
 `ArgumentParser.add_argument` method in Python.
 
 ### Children
 
-| **Present** | **yes** |
+| **Present** | Always |
 | :---------- | :------ |
 
 A list of child runnables (same format as this level, suited for recursive
