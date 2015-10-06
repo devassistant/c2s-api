@@ -145,30 +145,34 @@ a list of their children (forming a tree-like structure).
 
 ### Name
 
-| **Present** | Always |
+| **Property** | `"name"` |
 | :---------- | :------ |
+| **Present** | Always |
 
 A short name representation of the runnable. Last element of the property
 `"path"`.
 
-### Fullname
+### Full Name
 
-| **Present** | Always |
+| **Property** | `"fullname"` |
 | :---------- | :------ |
+| **Present** | Always |
 
 A human-readable name of the runnable.
 
 ### Description
 
-| **Present** | Always |
+| **Property** | `"description"` |
 | :---------- | :------ |
+| **Present** | Always |
 
 A detailed, multi-line description of the runnable.
 
 ### Path
 
-| **Present** | Always |
+| **Property** | `"path"` |
 | :---------- | :------ |
+| **Present** | Always |
 
 **Example**: `"/crt/python"`
 
@@ -177,8 +181,9 @@ assistant.
 
 ### Icon
 
-| **Present** | If requested |
+| **Property** | `"icon"` |
 | :---------- | :------ |
+| **Present** | If requested |
 
 **Example**:
 
@@ -196,8 +201,9 @@ and `"mimetype"` will.
 
 ### Arguments
 
-| **Present** | If requested |
+| **Property** | `"arguments"` |
 | :---------- | :------ |
+| **Present** | If requested |
 
 A list of objects, each describing an argument the runnable takes. The
 properties in the argument object closely correspond to the arguments of the
@@ -205,8 +211,9 @@ properties in the argument object closely correspond to the arguments of the
 
 ### Children
 
-| **Present** | Always |
+| **Property** | `"children"` |
 | :---------- | :------ |
+| **Present** | Always |
 
 A list of child runnables (same format as this level, suited for recursive
 traversal).
