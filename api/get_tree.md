@@ -44,6 +44,8 @@ The workflow for the `get_tree` request is purely synchronous:
 
 ## Query Options
 
+The `"version"` property is mandatory.
+
 **Example**
 
 ```

@@ -31,6 +31,8 @@ The workflow could be formalized as follows:
 
 ## Query Options
 
+The `"version"` property is mandatory.
+
 **Example**
 
 ```
