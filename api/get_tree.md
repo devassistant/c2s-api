@@ -227,7 +227,7 @@ provided by the server, and check against those.
 | **Property** | `"arguments"` |
 | :---------- | :------ |
 | **Type** | Array |
-| **Present** | If requested (see [`"arguments"`](#arguments) |
+| **Present** | If requested (see [`"arguments"`](#arguments)) |
 
 **Example**:
 
