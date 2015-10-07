@@ -116,6 +116,9 @@ If you want to retrieve only the children of a particular runnable, you may
 select so with the `"root"` property. In the example above, that would be
 subassistants to the Python *creator* assistant.
 
+When `"/"` or `""` (empty string) is used, information about all runnables is
+sent (which is the default behaviour).
+
 
 # Reply
 
