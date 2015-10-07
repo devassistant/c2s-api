@@ -26,7 +26,7 @@ The workflow could be formalized as follows:
     * An interactive query
         1. **Server → Client**: Query
         1. **Client → Server**: Reply to the query
-    * **Server → Client**: Error message
+    * **Server → Client**: [Error message](../README.md#error-message)
 1. **Server → Client**: Run finished
 
 ## Query Options

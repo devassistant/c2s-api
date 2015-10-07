@@ -39,7 +39,7 @@ The workflow for the `get_tree` request is purely synchronous:
 1. **Client → Server**: `get_tree` request
 1. One of:
     * **Server → Client**: Reply
-    * **Server → Client**: Error message
+    * **Server → Client**: [Error message](../README.md#error-message)
 
 
 ## Query Options

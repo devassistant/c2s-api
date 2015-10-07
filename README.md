@@ -1,5 +1,7 @@
 # DevAssistant Client/Server API
 
+**Version 1.0a**
+
 In this document, you can find examples and the description of usage of the
 DevAssistant client/server API available in DevAssistant version 1.0 upwards.
 This API is available while communicating through a UNIX domain socket or a
